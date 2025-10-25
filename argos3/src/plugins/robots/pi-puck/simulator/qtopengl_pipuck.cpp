@@ -51,18 +51,26 @@ namespace argos {
    void CQTOpenGLPiPuck::Draw(const CPiPuckEntity& c_entity) {
       /* Update LED materials */
       const CDirectionalLEDEquippedEntity& c_leds = c_entity.GetDirectionalLEDEquippedEntity();
-      for(UInt32 un_ring_led_index = 0;
-          un_ring_led_index < 8;
-          un_ring_led_index++) {
-         if(c_leds.GetLED(un_ring_led_index).GetColor() == CColor::BLACK) {
-            m_arrRingLEDs[un_ring_led_index]->Diffuse = m_arrRingLedOffAmbientDiffuse;
-            m_arrRingLEDs[un_ring_led_index]->Ambient = m_arrRingLedOffAmbientDiffuse;
-         }
-         else {
-            m_arrRingLEDs[un_ring_led_index]->Diffuse = m_arrRingLedOnAmbientDiffuse;
-            m_arrRingLEDs[un_ring_led_index]->Ambient = m_arrRingLedOnAmbientDiffuse;
-         }
-      }
+      for (UInt32 un_ring_led_index = 0;
+           un_ring_led_index < 8;
+           un_ring_led_index++) {
+         const CColor& c_led_color = c_leds.GetLED(un_ring_led_index).GetColor();
+         GLfloat glf_red_normalized = c_led_color.GetRed() / 255.0f;
+         GLfloat glf_green_normalized = c_led_color.GetGreen() / 255.0f;
+         GLfloat glf_blue_normalized = c_led_color.GetBlue() / 255.0f;
+         m_arrRingLEDs[un_ring_led_index]->Diffuse = {
+            glf_red_normalized,
+            glf_green_normalized,
+            glf_blue_normalized,
+            0.8f
+         };
+         m_arrRingLEDs[un_ring_led_index]->Ambient = {
+            glf_red_normalized,
+            glf_green_normalized,
+            glf_blue_normalized,
+            0.8f
+         };
+      }  
       if(c_leds.GetLED(BODY_LED_INDEX).GetColor() == CColor::BLACK) {
          m_sBodyLED.Diffuse = m_arrBodyLedOffAmbientDiffuse;
          m_sBodyLED.Ambient = m_arrBodyLedOffAmbientDiffuse;
