@@ -41,6 +41,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     simulator/camera_sensor_algorithms/camera_sensor_led_detector_algorithm.h
     simulator/camera_sensor_algorithms/camera_sensor_tag_detector_algorithm.h
     simulator/colored_blob_omnidirectional_camera_rotzonly_sensor.h
+  simulator/colored_blob_omnidirectional_camera_directional_sensor.h
     simulator/colored_blob_perspective_camera_default_sensor.h
     simulator/differential_steering_default_actuator.h
     simulator/differential_steering_default_sensor.h
@@ -104,6 +105,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     simulator/camera_sensor_algorithms/camera_sensor_led_detector_algorithm.cpp
     simulator/camera_sensor_algorithms/camera_sensor_tag_detector_algorithm.cpp
     simulator/colored_blob_omnidirectional_camera_rotzonly_sensor.cpp
+  simulator/colored_blob_omnidirectional_camera_directional_sensor.cpp
     simulator/colored_blob_perspective_camera_default_sensor.cpp
     simulator/differential_steering_default_actuator.cpp
     simulator/differential_steering_default_sensor.cpp

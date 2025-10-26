@@ -13,6 +13,7 @@
 
 #include <argos3/plugins/simulator/entities/directional_led_equipped_entity.h>
 #include <argos3/plugins/simulator/entities/simple_radio_equipped_entity.h>
+#include <argos3/plugins/simulator/entities/omnidirectional_camera_equipped_entity.h>
 #include <argos3/plugins/simulator/media/directional_led_medium.h>
 #include <argos3/plugins/simulator/media/simple_radio_medium.h>
 
@@ -141,6 +142,17 @@ namespace argos {
             m_pcDirectionalLEDEquippedEntity->Enable();
          }
          AddComponent(*m_pcDirectionalLEDEquippedEntity);
+         /* Create and initialize the omnidirectional camera entity */
+         CDegrees cAperture(70.0f);
+         GetNodeAttributeOrDefault(t_tree, "camera_aperture", cAperture, cAperture);
+         m_pcOmnidirectionalCameraEquippedEntity = 
+            new COmnidirectionalCameraEquippedEntity(
+               this,
+               "omnidirectional_camera_0",
+               ToRadians(cAperture),
+               CVector3(0.0f, 0.0f, 0.05f)
+            );
+         AddComponent(*m_pcOmnidirectionalCameraEquippedEntity);
          /* Create and initialize the controllable entity */
          m_pcControllableEntity = new CControllableEntity(this);
          AddComponent(*m_pcControllableEntity);
