@@ -10,7 +10,7 @@
 namespace argos {
    class CPiPuckDifferentialDriveEntity;
    class CControllableEntity;
-   class CDirectionalLEDEquippedEntity;
+   class CLEDEquippedEntity;
    class CEmbodiedEntity;
    class CSimpleRadioEquippedEntity;
    class COmnidirectionalCameraEquippedEntity;
@@ -56,12 +56,12 @@ namespace argos {
          return *m_pcDifferentialDriveEntity;
       }
 
-      inline CDirectionalLEDEquippedEntity& GetDirectionalLEDEquippedEntity() {
-         return *m_pcDirectionalLEDEquippedEntity;
+      inline CLEDEquippedEntity& GetLEDEquippedEntity() {
+         return *m_pcLEDEquippedEntity;
       }
 
-      inline const CDirectionalLEDEquippedEntity& GetDirectionalLEDEquippedEntity() const {
-         return *m_pcDirectionalLEDEquippedEntity;
+      inline const CLEDEquippedEntity& GetLEDEquippedEntity() const {
+         return *m_pcLEDEquippedEntity;
       }
 
       inline CEmbodiedEntity& GetEmbodiedEntity() {
@@ -85,7 +85,7 @@ namespace argos {
    private:
 
       CControllableEntity*            m_pcControllableEntity;
-      CDirectionalLEDEquippedEntity*  m_pcDirectionalLEDEquippedEntity;
+   CLEDEquippedEntity*             m_pcLEDEquippedEntity;
       CEmbodiedEntity*                m_pcEmbodiedEntity;
       CPiPuckDifferentialDriveEntity* m_pcDifferentialDriveEntity;
       CSimpleRadioEquippedEntity*     m_pcSimpleRadioEquippedEntity;

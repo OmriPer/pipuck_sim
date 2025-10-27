@@ -32,7 +32,7 @@ namespace argos {
                m_pcColoredLEDs->SetRingLEDs(CColor::BLUE);
                break;
             case 75 ... 99:
-               m_pcColoredLEDs->SetRingLEDs(CColor::BLACK);
+               m_pcColoredLEDs->SetRingLEDs(CColor::PURPLE);
                break;
          }
          // read leds from camera

@@ -2,7 +2,7 @@
 
 namespace argos {
    class CPiPuckLEDsColorActuator;
-   class CDirectionalLEDEntity;
+   class CLEDEntity;
 }
 
 #include <argos3/core/simulator/actuator.h>
@@ -45,8 +45,8 @@ namespace argos {
 
    private:
 
-      std::array<std::pair<CDirectionalLEDEntity*, CColor>, 
-                 CCI_PiPuckColorLEDsActuator::NUM_LEDS> m_arrLEDs;
+   std::array<std::pair<CLEDEntity*, CColor>, 
+           CCI_PiPuckColorLEDsActuator::NUM_LEDS> m_arrLEDs;
 
    };
 }

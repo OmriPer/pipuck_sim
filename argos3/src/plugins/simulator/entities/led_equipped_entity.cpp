@@ -178,6 +178,17 @@ namespace argos {
       return m_tLEDs[un_index]->LED;
    }
 
+   const CLEDEntity& CLEDEquippedEntity::GetLED(UInt32 un_index) const {
+            ARGOS_ASSERT(un_index < m_tLEDs.size(),
+                   "CLEDEquippedEntity::GetLED(), id=\"" <<
+                   GetId() <<
+                   "\": index out of bounds: un_index = " <<
+                   un_index <<
+                   ", m_tLEDs.size() = " <<
+                   m_tLEDs.size());
+      return m_tLEDs[un_index]->LED;
+   }
+
    /****************************************/
    /****************************************/
 

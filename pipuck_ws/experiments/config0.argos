@@ -20,7 +20,7 @@
         <pipuck_leds implementation="color" medium="leds" />
       </actuators>
       <sensors>
-        <colored_blob_omnidirectional_camera implementation="directional_led" medium="leds" show_rays="true" />
+        <colored_blob_omnidirectional_camera implementation="rot_z_only" medium="leds" show_rays="true" />
       </sensors>
       <params />
     </controller0>
@@ -42,14 +42,18 @@
     <box id="wall_east" size="0.1,4,0.5" movable="false"><body position="2,0,0" orientation="0,0,0"/></box>
     <box id="wall_west" size="0.1,4,0.5" movable="false"><body position="-2,0,0" orientation="0,0,0"/></box>
     <!-- robots -->
-    <pipuck id="pipuck0">
+    <pipuck id="pipuck0" led_medium="leds">
       <body position="-0.5,0,0" orientation="0,0,0"/>
       <controller config="controller0"/>
     </pipuck>
-    <pipuck id="pipuck1">
-      <body position="0.5,0,0" orientation="0,0,pi"/>
+    <pipuck id="pipuck1" led_medium="leds">
+      <body position="0.5,0,0" orientation="0,0,3.14"/>
       <controller config="controller0"/>
     </pipuck>
+    <!-- <light id="light0" color="255,0,0,255" intensity="1000" medium="leds">
+      <body position="0,0,0.5" />
+    </light> -->
+
 
 
   </arena>
@@ -65,7 +69,7 @@
   <!-- * Media * -->
   <!-- ********* -->
   <media>
-    <directional_led id="leds"/>
+    <led id="leds"/>
   </media>
 
   <!-- ****************** -->

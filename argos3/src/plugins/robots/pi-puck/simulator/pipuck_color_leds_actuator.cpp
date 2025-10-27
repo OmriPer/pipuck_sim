@@ -6,7 +6,7 @@
 #include <argos3/core/utility/logging/argos_log.h>
 
 #include <argos3/plugins/robots/pi-puck/simulator/pipuck_entity.h>
-#include <argos3/plugins/simulator/entities/directional_led_equipped_entity.h>
+#include <argos3/plugins/simulator/entities/led_equipped_entity.h>
 
 namespace argos {
 
@@ -22,17 +22,17 @@ namespace argos {
    /****************************************/
 
    void CPiPuckLEDsColorActuator::SetRobot(CComposableEntity& c_entity) {
-      CDirectionalLEDEquippedEntity* pcLEDEquippedEntity = 
-         &(c_entity.GetComponent<CDirectionalLEDEquippedEntity>("directional_leds"));
+      CLEDEquippedEntity* pcLEDEquippedEntity =
+         &(c_entity.GetComponent<CLEDEquippedEntity>("leds"));
       pcLEDEquippedEntity->Enable();
-      CDirectionalLEDEquippedEntity::SInstance::TVector& sInstances =
-         pcLEDEquippedEntity->GetInstances();
+      CLEDEquippedEntity::SActuator::TList& sInstances =
+         pcLEDEquippedEntity->GetLEDs();
       if(sInstances.size() != CCI_PiPuckColorLEDsActuator::NUM_LEDS) {
          THROW_ARGOSEXCEPTION("Simulator reports an incorrect number of LEDs for the Pi-Puck");
       }
       // map the LEDs to the internal color array
       for(UInt32 un_index = 0; un_index < CCI_PiPuckColorLEDsActuator::NUM_LEDS; un_index++) {
-         m_arrLEDs[un_index].first = &sInstances[un_index].LED;
+         m_arrLEDs[un_index].first = &sInstances[un_index]->LED;
       }
    }
 
@@ -52,7 +52,7 @@ namespace argos {
    /****************************************/
 
    void CPiPuckLEDsColorActuator::Update() {
-      for(std::pair<CDirectionalLEDEntity*, CColor>& c_led : m_arrLEDs) {
+      for(std::pair<CLEDEntity*, CColor>& c_led : m_arrLEDs) {
          c_led.first->SetColor(c_led.second);
       }
    }
@@ -61,7 +61,7 @@ namespace argos {
    /****************************************/
    
    void CPiPuckLEDsColorActuator::Reset() {
-      for(std::pair<CDirectionalLEDEntity*, CColor>& c_led : m_arrLEDs) {
+      for(std::pair<CLEDEntity*, CColor>& c_led : m_arrLEDs) {
          c_led.second = CColor::BLACK;
       }
    }
