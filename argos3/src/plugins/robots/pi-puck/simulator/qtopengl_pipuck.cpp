@@ -9,7 +9,7 @@
 #include <argos3/core/utility/datatypes/color.h>
 #include <argos3/core/utility/math/vector2.h>
 #include <argos3/plugins/robots/pi-puck/simulator/pipuck_entity.h>
-#include <argos3/plugins/simulator/entities/directional_led_equipped_entity.h>
+#include <argos3/plugins/simulator/entities/led_equipped_entity.h>
 #include <argos3/plugins/simulator/visualizations/qt-opengl/qtopengl_widget.h>
 
 #include <array>
@@ -50,7 +50,7 @@ namespace argos {
 
    void CQTOpenGLPiPuck::Draw(const CPiPuckEntity& c_entity) {
       /* Update LED materials */
-      const CDirectionalLEDEquippedEntity& c_leds = c_entity.GetDirectionalLEDEquippedEntity();
+      const CLEDEquippedEntity& c_leds = c_entity.GetLEDEquippedEntity();
       for (UInt32 un_ring_led_index = 0;
            un_ring_led_index < 8;
            un_ring_led_index++) {

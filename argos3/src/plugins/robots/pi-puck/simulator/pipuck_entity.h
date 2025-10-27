@@ -10,9 +10,10 @@
 namespace argos {
    class CPiPuckDifferentialDriveEntity;
    class CControllableEntity;
-   class CDirectionalLEDEquippedEntity;
+   class CLEDEquippedEntity;
    class CEmbodiedEntity;
    class CSimpleRadioEquippedEntity;
+   class COmnidirectionalCameraEquippedEntity;
 }
 
 #include <argos3/core/simulator/entity/composable_entity.h>
@@ -32,7 +33,8 @@ namespace argos {
          m_pcControllableEntity(nullptr),
          m_pcEmbodiedEntity(nullptr),
          m_pcDifferentialDriveEntity(nullptr),
-         m_pcSimpleRadioEquippedEntity(nullptr) {}
+         m_pcSimpleRadioEquippedEntity(nullptr),
+         m_pcOmnidirectionalCameraEquippedEntity(nullptr) {}
 
       virtual ~CPiPuckEntity() {}
 
@@ -54,12 +56,12 @@ namespace argos {
          return *m_pcDifferentialDriveEntity;
       }
 
-      inline CDirectionalLEDEquippedEntity& GetDirectionalLEDEquippedEntity() {
-         return *m_pcDirectionalLEDEquippedEntity;
+      inline CLEDEquippedEntity& GetLEDEquippedEntity() {
+         return *m_pcLEDEquippedEntity;
       }
 
-      inline const CDirectionalLEDEquippedEntity& GetDirectionalLEDEquippedEntity() const {
-         return *m_pcDirectionalLEDEquippedEntity;
+      inline const CLEDEquippedEntity& GetLEDEquippedEntity() const {
+         return *m_pcLEDEquippedEntity;
       }
 
       inline CEmbodiedEntity& GetEmbodiedEntity() {
@@ -83,10 +85,11 @@ namespace argos {
    private:
 
       CControllableEntity*            m_pcControllableEntity;
-      CDirectionalLEDEquippedEntity*  m_pcDirectionalLEDEquippedEntity;
+   CLEDEquippedEntity*             m_pcLEDEquippedEntity;
       CEmbodiedEntity*                m_pcEmbodiedEntity;
       CPiPuckDifferentialDriveEntity* m_pcDifferentialDriveEntity;
       CSimpleRadioEquippedEntity*     m_pcSimpleRadioEquippedEntity;
+      COmnidirectionalCameraEquippedEntity* m_pcOmnidirectionalCameraEquippedEntity;
 
       static const CVector3 WIFI_OFFSET_POSITION;
       static const Real     WIFI_TRANSMISSION_RANGE;

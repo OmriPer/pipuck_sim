@@ -119,11 +119,26 @@ namespace argos {
       CLEDEntity& GetLED(UInt32 un_index);
 
       /**
+       * Returns the LED by id as a const reference.
+       * @param un_index The id of the wanted LED.
+       * @return The LED by id as a const reference.
+       */
+      const CLEDEntity& GetLED(UInt32 un_index) const;
+
+      /**
        * Returns all the LEDs.
        * @return All the LEDs.
        * @see GetLED()
        */
       inline SActuator::TList& GetLEDs() {
+         return m_tLEDs;
+      }
+
+      /**
+       * Returns the LEDs as a const list.
+       * @return The LEDs as a const list.
+       */
+      inline const SActuator::TList& GetLEDs() const {
          return m_tLEDs;
       }
 
