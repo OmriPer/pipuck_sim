@@ -67,6 +67,8 @@ namespace argos {
    /****************************************/
 
    void CPiPuckDifferentialDriveDefaultActuator::SetLinearVelocity(Real f_left, Real f_right) {
+      f_left = std::clamp(f_left, -CCI_PiPuckDifferentialDriveActuator::MAX_WHEEL_VELOCITY, CCI_PiPuckDifferentialDriveActuator::MAX_WHEEL_VELOCITY);
+      f_right = std::clamp(f_right, -CCI_PiPuckDifferentialDriveActuator::MAX_WHEEL_VELOCITY, CCI_PiPuckDifferentialDriveActuator::MAX_WHEEL_VELOCITY);
       m_fTargetVelocityLeft = f_left;
       m_fTargetVelocityRight = f_right;
    }

@@ -23,6 +23,8 @@ namespace argos {
 
       virtual void SetLinearVelocity(Real f_left, Real f_right) = 0;
 
+      static constexpr Real MAX_WHEEL_VELOCITY = 0.154f; // m/sec
+
 #ifdef ARGOS_WITH_LUA
       virtual void CreateLuaState(lua_State* pt_lua_state);
 #endif
