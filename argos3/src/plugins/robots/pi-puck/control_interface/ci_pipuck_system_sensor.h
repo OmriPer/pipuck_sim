@@ -24,7 +24,15 @@ namespace argos {
          m_fTemperature(0.0f) {}
       
       virtual ~CCI_PiPuckSystemSensor() {}
-     
+
+      Real GetTime() const {
+         return m_fTime;
+      }
+
+      Real GetTemperature() const {
+         return m_fTemperature;
+      }
+
 #ifdef ARGOS_WITH_LUA
       virtual void CreateLuaState(lua_State* pt_lua_state);
 
