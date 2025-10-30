@@ -21,6 +21,8 @@
       </actuators>
       <sensors>
         <colored_blob_omnidirectional_camera implementation="rot_z_only" medium="leds" show_rays="true" />
+        <pipuck_rangefinders implementation="default" />
+        <pipuck_system implementation="default" />
       </sensors>
       <params />
     </controller0>
@@ -43,18 +45,11 @@
     <box id="wall_west" size="0.1,4,0.5" movable="false"><body position="-2,0,0" orientation="0,0,0"/></box>
     <!-- robots -->
     <pipuck id="pipuck0" led_medium="leds">
-      <body position="-0.5,0,0" orientation="0,0,0"/>
+      <body position="0.0,0.0,0"/>
       <controller config="controller0"/>
     </pipuck>
-    <pipuck id="pipuck1" led_medium="leds">
-      <body position="0.5,0,0" orientation="0,0,3.14"/>
-      <controller config="controller0"/>
-    </pipuck>
-    <!-- <light id="light0" color="255,0,0,255" intensity="1000" medium="leds">
-      <body position="0,0,0.5" />
-    </light> -->
-
-
+    <!-- lights -->
+    <light id="light0" color="255,0,0,255" intensity="100" medium="leds" position="1,0,0"/>
 
   </arena>
 
@@ -79,7 +74,7 @@
     <qt-opengl show_boundary="false">
       <camera>
         <placements>  
-          <placement index="0" position="0,1,0.5" look_at="0,0,0" up="0,0,1"/>
+          <placement index="0" position="0,0,3" look_at="0,0,0" up="0,1,0"/>
         </placements>
       </camera>
     </qt-opengl>

@@ -18,12 +18,6 @@ namespace argos {
       virtual ~CTestLoopFunctions() {}
 
       virtual bool IsExperimentFinished() override;
-
-   private:
-
-      const static CVector3 TARGET_POSITION;
-      const static Real THRESHOLD;
-
    };
 }
 

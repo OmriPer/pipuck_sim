@@ -1,6 +1,7 @@
 set(SRC
     loop_functions.cpp
     loop_functions.hpp
+    # Add other loop function source files here
 )
 
 add_library(my_loop_functions MODULE ${SRC})

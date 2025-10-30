@@ -1,6 +1,7 @@
 set(SRC
   controller0.hpp
   controller0.cpp
+  # Add other controller source files here
 )
 
 add_library(pipuck_controller0 MODULE ${SRC})

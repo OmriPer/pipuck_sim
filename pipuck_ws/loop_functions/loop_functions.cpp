@@ -8,12 +8,10 @@ namespace argos {
    /****************************************/
 
    bool CTestLoopFunctions::IsExperimentFinished() {
-      // stop the experiment after 100 ticks
-      // if(GetSpace().GetSimulationClock() < 100) {
-      //    return false;
-      // }
       return false;
    }
+
+   
 
    /****************************************/
    /****************************************/

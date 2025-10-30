@@ -2,6 +2,9 @@
 #include <argos3/plugins/robots/pi-puck/control_interface/ci_pipuck_differential_drive_actuator.h>
 #include <argos3/plugins/robots/pi-puck/control_interface/ci_pipuck_color_leds_actuator.h>
 #include <argos3/plugins/robots/generic/control_interface/ci_colored_blob_omnidirectional_camera_sensor.h>
+#include <argos3/plugins/robots/pi-puck/control_interface/ci_pipuck_rangefinders_sensor.h>
+#include <argos3/plugins/robots/pi-puck/control_interface/ci_pipuck_system_sensor.h>
+#include <argos3/plugins/robots/pi-puck/control_interface/ci_pipuck_differential_drive_sensor.h>
 #include <argos3/core/simulator/simulator.h>
 
 namespace argos {
@@ -22,5 +25,7 @@ namespace argos {
       CCI_PiPuckDifferentialDriveActuator* m_pcWheels = nullptr;
       CCI_PiPuckColorLEDsActuator* m_pcColoredLEDs = nullptr;
       CCI_ColoredBlobOmnidirectionalCameraSensor* m_pcCamera = nullptr;
+      CCI_PiPuckRangefindersSensor* m_pcRangefinders = nullptr;
+      CCI_PiPuckSystemSensor* m_pcSystem = nullptr;
    };
 }
