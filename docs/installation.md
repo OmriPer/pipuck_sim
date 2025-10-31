@@ -1,8 +1,8 @@
 # installation
 ## 1. clone the repository
 ```sh
-git clone git@github.com:OmriPer/pipuck2_ws.git
-cd pipuck2_ws
+git clone git@github.com:OmriPer/pipuck_sim.git
+cd pipuck_sim
 ```
 ## 2. Install System Dependencies
 ```sh
