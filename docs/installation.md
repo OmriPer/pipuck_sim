@@ -16,7 +16,6 @@ sudo apt install build-essential cmake git wget curl -y
 sudo apt install libfreeimage-dev libfreeimageplus-dev \
     qtbase5-dev qt5-qmake qtbase5-dev-tools \
     freeglut3-dev libxi-dev libxmu-dev \
-    liblua5.3-dev lua5.3 \
     doxygen graphviz libgraphviz-dev asciidoc \
     libgl1-mesa-dev libglu1-mesa-dev x11-apps -y
 ```
