@@ -22,13 +22,15 @@ namespace argos {
          CEmbodiedEntity& c_embodied_entity,
          CControllableEntity& c_controllable_entity,
          bool b_show_rays,
-         Real f_noise_std_dev) :
+         Real f_noise_std_dev,
+         bool b_check_occlusions) :
          m_tBlobs(t_blobs),
          m_cOmnicamEntity(c_omnicam_entity),
          m_cEmbodiedEntity(c_embodied_entity),
          m_cControllableEntity(c_controllable_entity),
          m_bShowRays(b_show_rays),
          m_fDistanceNoiseStdDev(f_noise_std_dev),
+         m_bCheckOcclusions(b_check_occlusions),
          m_pcRNG(nullptr) {
          m_pcRootSensingEntity = &m_cEmbodiedEntity.GetParent();
          if(m_fDistanceNoiseStdDev > 0.0f) {
@@ -59,12 +61,16 @@ namespace argos {
             m_cLEDRelativePos -= m_cCameraPos;
             m_cLEDRelativePosXY.Set(m_cLEDRelativePos.GetX(),
                                     m_cLEDRelativePos.GetY());
+            bool bOccluded = false;
+            if(m_bCheckOcclusions) {
+               bOccluded = GetClosestEmbodiedEntityIntersectedByRay(m_sIntersectionItem,
+                                                                   m_cOcclusionCheckRay,
+                                                                   m_cEmbodiedEntity);
+            }
             if(Abs(m_cLEDRelativePos.GetX()) < m_fGroundHalfRange &&
                Abs(m_cLEDRelativePos.GetY()) < m_fGroundHalfRange &&
                m_cLEDRelativePos.GetZ() < m_cCameraPos.GetZ() &&
-               !GetClosestEmbodiedEntityIntersectedByRay(m_sIntersectionItem,
-                                                         m_cOcclusionCheckRay,
-                                                         m_cEmbodiedEntity)) {
+               !bOccluded) {
                /* If noise was setup, add it */
                if(m_fDistanceNoiseStdDev > 0.0f) {
                   m_cLEDRelativePosXY += CVector2(
@@ -113,6 +119,7 @@ namespace argos {
       SEmbodiedEntityIntersectionItem m_sIntersectionItem;
       CRay3 m_cOcclusionCheckRay;
       Real m_fDistanceNoiseStdDev;
+      bool m_bCheckOcclusions;
       CRandom::CRNG* m_pcRNG;
    };
 
@@ -158,6 +165,9 @@ namespace argos {
          /* Parse noise */
          Real fDistanceNoiseStdDev = 0;
          GetNodeAttributeOrDefault(t_tree, "noise_std_dev", fDistanceNoiseStdDev, fDistanceNoiseStdDev);
+         /* Parse occlusion checking */
+         bool bCheckOcclusions;
+         GetNodeAttribute(t_tree, "check_occlusions", bCheckOcclusions);
          /* Get LED medium from id specified in the XML */
          std::string strMedium;
          GetNodeAttribute(t_tree, "medium", strMedium);
@@ -169,7 +179,8 @@ namespace argos {
             *m_pcEmbodiedEntity,
             *m_pcControllableEntity,
             m_bShowRays,
-            fDistanceNoiseStdDev);
+            fDistanceNoiseStdDev,
+            bCheckOcclusions);
       }
       catch(CARGoSException& ex) {
          THROW_ARGOSEXCEPTION_NESTED("Error initializing the colored blob omnidirectional camera rotzonly sensor", ex);
