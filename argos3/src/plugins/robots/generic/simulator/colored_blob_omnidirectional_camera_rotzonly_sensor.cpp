@@ -167,7 +167,7 @@ namespace argos {
          GetNodeAttributeOrDefault(t_tree, "noise_std_dev", fDistanceNoiseStdDev, fDistanceNoiseStdDev);
          /* Parse occlusion checking */
          bool bCheckOcclusions;
-         GetNodeAttribute(t_tree, "check_occlusions", bCheckOcclusions);
+         GetNodeAttributeOrDefault(t_tree, "check_occlusions", bCheckOcclusions, true);
          /* Get LED medium from id specified in the XML */
          std::string strMedium;
          GetNodeAttribute(t_tree, "medium", strMedium);
