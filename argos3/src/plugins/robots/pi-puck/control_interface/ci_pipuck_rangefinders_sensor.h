@@ -28,13 +28,13 @@ namespace argos {
       using TConfiguration = std::tuple<const char*, CVector3, CQuaternion, Real>;
 
       struct SInterface {
-         SInterface(const UInt8& un_label) :
+         SInterface(const UInt8& un_label, const TConfiguration& t_config) :
             Label(un_label),
-            Configuration(MAP_SENSOR_CONFIG.at(un_label)),
+            Configuration(t_config),
             Proximity(0.0),
             Illuminance(0.0) {}
          const UInt8& Label;
-         const TConfiguration& Configuration;
+         TConfiguration Configuration;
          Real Proximity;
          Real Illuminance;
          

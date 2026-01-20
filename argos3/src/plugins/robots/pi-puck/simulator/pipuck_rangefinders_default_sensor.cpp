@@ -26,7 +26,7 @@ namespace argos {
          const char* pchAnchor = std::get<const char*>(t_config.second);
          SAnchor& sAnchor =
             c_entity.GetComponent<CEmbodiedEntity>("body").GetAnchor(pchAnchor);
-         m_vecSimulatedInterfaces.emplace_back(t_config.first, sAnchor);
+         m_vecSimulatedInterfaces.emplace_back(t_config.first, sAnchor, t_config.second);
       }
    }
 
@@ -38,6 +38,10 @@ namespace argos {
          CCI_PiPuckRangefindersSensor::Init(t_tree);
          GetNodeAttributeOrDefault(t_tree, "show_rays", m_bShowRays, m_bShowRays);
          GetNodeAttributeOrDefault(t_tree, "range", m_fRange, 0.1);
+         // update the range in the configuration tuples
+         for(auto& s_interface : m_vecSimulatedInterfaces) {
+            std::get<Real>(s_interface.Configuration) = m_fRange;
+         }
       }
       catch(CARGoSException& ex) {
          THROW_ARGOSEXCEPTION_NESTED("Initialization error in the Pi-Puck rangefinders sensor.", ex);
