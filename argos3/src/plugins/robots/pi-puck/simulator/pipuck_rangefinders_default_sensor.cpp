@@ -37,6 +37,7 @@ namespace argos {
       try {
          CCI_PiPuckRangefindersSensor::Init(t_tree);
          GetNodeAttributeOrDefault(t_tree, "show_rays", m_bShowRays, m_bShowRays);
+         GetNodeAttributeOrDefault(t_tree, "range", m_fRange, 0.1);
       }
       catch(CARGoSException& ex) {
          THROW_ARGOSEXCEPTION_NESTED("Initialization error in the Pi-Puck rangefinders sensor.", ex);
@@ -56,7 +57,7 @@ namespace argos {
          cRayStart = std::get<CVector3>(s_interface.Configuration);
          cRayStart.Rotate(s_interface.Anchor.Orientation);
          cRayStart += s_interface.Anchor.Position;
-         cRayEnd = CVector3::Z * std::get<Real>(s_interface.Configuration);
+         cRayEnd = CVector3::Z * m_fRange;
          cRayEnd.Rotate(std::get<CQuaternion>(s_interface.Configuration));
          cRayEnd.Rotate(s_interface.Anchor.Orientation);
          cRayEnd += cRayStart;
@@ -73,7 +74,7 @@ namespace argos {
          }
          else {
             /* No intersection */
-            s_interface.Proximity = std::get<Real>(s_interface.Configuration);
+            s_interface.Proximity = m_fRange;
             if(m_bShowRays) {
                m_pcControllableEntity->AddCheckedRay(false, cSensorRay);
             }
@@ -88,7 +89,7 @@ namespace argos {
    
    void CPiPuckRangefindersDefaultSensor::Reset() {
       for(SSimulatedInterface& s_interface : m_vecSimulatedInterfaces) {
-         s_interface.Proximity = std::get<Real>(s_interface.Configuration);
+         s_interface.Proximity = m_fRange;
          s_interface.Illuminance = 0.0;
       }
    }
