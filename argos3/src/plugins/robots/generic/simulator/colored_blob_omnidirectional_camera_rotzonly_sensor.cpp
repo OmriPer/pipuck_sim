@@ -204,6 +204,8 @@ namespace argos {
       CVector3 cCameraPos = m_pcOmnicamEntity->GetOffset();
       cCameraPos += m_pcEmbodiedEntity->GetOriginAnchor().Position;
       Real fGroundHalfRange = cCameraPos.GetZ() * Tan(m_pcOmnicamEntity->GetAperture());
+      m_fCameraRange = fGroundHalfRange * 100.0f;
+      
       /* Prepare the operation */
       m_pcOperation->Setup(fGroundHalfRange);
       /* Go through LED entities in box range */

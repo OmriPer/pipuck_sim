@@ -104,7 +104,9 @@ namespace argos {
       /**
        * Constructor
        */
-      CCI_ColoredBlobOmnidirectionalCameraSensor() {}
+      CCI_ColoredBlobOmnidirectionalCameraSensor() :
+         m_fCameraRange(0.0f) {
+      }
 
       /**
        * Destructor
@@ -117,6 +119,14 @@ namespace argos {
        */
       const SReadings& GetReadings() const;
 
+      /**
+       * Returns the camera ground half-range in cm.
+       * @return The camera range in cm.
+       */
+      const Real GetCameraRange() const {
+         return IsDisabled() ? 0.0f : m_fCameraRange;
+      }
+
 #ifdef ARGOS_WITH_LUA
       virtual void CreateLuaState(lua_State* pt_lua_state);
 
@@ -126,6 +136,7 @@ namespace argos {
    protected:
 
       SReadings m_sReadings;
+      Real m_fCameraRange;
 
    };
 
