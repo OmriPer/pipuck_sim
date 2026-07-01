@@ -106,16 +106,16 @@ namespace argos {
       
          m_pcOmnidirectionalCameraEquippedEntity->Enable();
          AddComponent(*m_pcOmnidirectionalCameraEquippedEntity);
-         /* Create and initialize the controllable entity */
-         m_pcControllableEntity = new CControllableEntity(this, "controller");
-         AddComponent(*m_pcControllableEntity);
-         m_pcControllableEntity->Init(GetNode(t_tree, "controller"));
+         Real fRange = 3.0f;
+         GetNodeAttributeOrDefault(t_tree, "rab_range", fRange, fRange);
+         UInt32 unDataSize = 10;
+         GetNodeAttributeOrDefault(t_tree, "rab_data_size", unDataSize, unDataSize);
 
          m_pcRABEquippedEntity = new CRABEquippedEntity(
             this,
             "rab",
-            10,
-            3.0f,
+            unDataSize,
+            fRange,
             m_pcEmbodiedEntity->GetOriginAnchor(),
             *m_pcEmbodiedEntity,
             CVector3(0.0f, 0.0f, 0.05f),
@@ -123,6 +123,11 @@ namespace argos {
          );
          AddComponent(*m_pcRABEquippedEntity);
          m_pcRABEquippedEntity->Enable();
+
+         /* Create and initialize the controllable entity */
+         m_pcControllableEntity = new CControllableEntity(this, "controller");
+         AddComponent(*m_pcControllableEntity);
+         m_pcControllableEntity->Init(GetNode(t_tree, "controller"));
 
          /* Update components */
          UpdateComponents();
