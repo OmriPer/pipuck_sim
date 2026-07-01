@@ -14,6 +14,7 @@ namespace argos {
    class CEmbodiedEntity;
    class CSimpleRadioEquippedEntity;
    class COmnidirectionalCameraEquippedEntity;
+   class CRABEquippedEntity;
 }
 
 #include <argos3/core/simulator/entity/composable_entity.h>
@@ -80,6 +81,10 @@ namespace argos {
          return *m_pcSimpleRadioEquippedEntity;
       }
 
+      inline const CRABEquippedEntity& GetRABEquippedEntity() const {
+         return *m_pcRABEquippedEntity;
+      }
+
       virtual void UpdateComponents();
 
    private:
@@ -90,6 +95,7 @@ namespace argos {
       CPiPuckDifferentialDriveEntity* m_pcDifferentialDriveEntity;
       CSimpleRadioEquippedEntity*     m_pcSimpleRadioEquippedEntity;
       COmnidirectionalCameraEquippedEntity* m_pcOmnidirectionalCameraEquippedEntity;
+      CRABEquippedEntity* m_pcRABEquippedEntity;
 
       static const CVector3 WIFI_OFFSET_POSITION;
       static const Real     WIFI_TRANSMISSION_RANGE;

@@ -16,6 +16,7 @@
 #include <argos3/plugins/simulator/entities/omnidirectional_camera_equipped_entity.h>
 #include <argos3/plugins/simulator/media/led_medium.h>
 #include <argos3/plugins/simulator/media/simple_radio_medium.h>
+#include <argos3/plugins/simulator/entities/rab_equipped_entity.h>
 
 #include <argos3/plugins/robots/pi-puck/simulator/pipuck_differential_drive_entity.h>
 
@@ -109,6 +110,20 @@ namespace argos {
          m_pcControllableEntity = new CControllableEntity(this, "controller");
          AddComponent(*m_pcControllableEntity);
          m_pcControllableEntity->Init(GetNode(t_tree, "controller"));
+
+         m_pcRABEquippedEntity = new CRABEquippedEntity(
+            this,
+            "rab",
+            10,
+            3.0f,
+            m_pcEmbodiedEntity->GetOriginAnchor(),
+            *m_pcEmbodiedEntity,
+            CVector3(0.0f, 0.0f, 0.05f),
+            CQuaternion()
+         );
+         AddComponent(*m_pcRABEquippedEntity);
+         m_pcRABEquippedEntity->Enable();
+
          /* Update components */
          UpdateComponents();
       }
