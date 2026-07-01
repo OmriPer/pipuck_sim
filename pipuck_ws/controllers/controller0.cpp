@@ -14,13 +14,35 @@ namespace argos {
       m_pcSystem = GetSensor<CCI_PiPuckSystemSensor>("pipuck_system");
       m_pcCamera = GetSensor<CCI_ColoredBlobOmnidirectionalCameraSensor>("colored_blob_omnidirectional_camera");
       m_pcRangefinders = GetSensor<CCI_PiPuckRangefindersSensor>("pipuck_rangefinders");
-
-
-      /* Your Init code here */
+      m_pcRABSens = GetSensor<CCI_RangeAndBearingSensor>("range_and_bearing");
+      m_pcRABAct = GetActuator<CCI_RangeAndBearingActuator>("range_and_bearing");      /* Your Init code here */
    }
 
    void Controller0::ControlStep() {
-      /* Your ControlStep code here */
+      /* Clear the data buffer before writing new data */
+      m_pcRABAct->ClearData();
+      
+      /* Only set data if size is at least 2 */
+      if (m_pcRABAct->GetSize() >= 2) {
+         m_pcRABAct->SetData(0, 42);
+         m_pcRABAct->SetData(1, 13);
+      }
+
+      /* Log the size of the data we can send */
+      RLOG << "RAB Max Data Size: " << m_pcRABAct->GetSize() << std::endl;
+
+      /* Read RAB data */
+      const CCI_RangeAndBearingSensor::TReadings& tPackets = m_pcRABSens->GetReadings();
+      for(size_t i = 0; i < tPackets.size(); ++i) {
+         RLOG << "Received RAB message from dist " << tPackets[i].Range
+              << " angle: " << tPackets[i].HorizontalBearing
+              << " size: " << tPackets[i].Data.Size();
+         if (tPackets[i].Data.Size() >= 2) {
+             RLOG << " with data[0]=" << (int)tPackets[i].Data[0]
+                  << " data[1]=" << (int)tPackets[i].Data[1];
+         }
+         RLOG << std::endl;
+      }
    }
 
    /****************************************/

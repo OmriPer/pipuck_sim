@@ -5,6 +5,8 @@
 #include <argos3/plugins/robots/pi-puck/control_interface/ci_pipuck_rangefinders_sensor.h>
 #include <argos3/plugins/robots/pi-puck/control_interface/ci_pipuck_system_sensor.h>
 #include <argos3/plugins/robots/pi-puck/control_interface/ci_pipuck_differential_drive_sensor.h>
+#include <argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_sensor.h>
+#include <argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_actuator.h>
 #include <argos3/core/simulator/simulator.h>
 
 namespace argos {
@@ -27,5 +29,7 @@ namespace argos {
       CCI_ColoredBlobOmnidirectionalCameraSensor* m_pcCamera = nullptr;
       CCI_PiPuckRangefindersSensor* m_pcRangefinders = nullptr;
       CCI_PiPuckSystemSensor* m_pcSystem = nullptr;
+      CCI_RangeAndBearingSensor* m_pcRABSens = nullptr;
+      CCI_RangeAndBearingActuator* m_pcRABAct = nullptr;
    };
 }
