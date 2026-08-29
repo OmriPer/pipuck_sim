@@ -61,16 +61,13 @@ namespace argos {
             m_cLEDRelativePos -= m_cCameraPos;
             m_cLEDRelativePosXY.Set(m_cLEDRelativePos.GetX(),
                                     m_cLEDRelativePos.GetY());
-            bool bOccluded = false;
-            if(m_bCheckOcclusions) {
-               bOccluded = GetClosestEmbodiedEntityIntersectedByRay(m_sIntersectionItem,
-                                                                   m_cOcclusionCheckRay,
-                                                                   m_cEmbodiedEntity);
-            }
             if(Abs(m_cLEDRelativePos.GetX()) < m_fGroundHalfRange &&
                Abs(m_cLEDRelativePos.GetY()) < m_fGroundHalfRange &&
                m_cLEDRelativePos.GetZ() < m_cCameraPos.GetZ() &&
-               !bOccluded) {
+               !(m_bCheckOcclusions &&
+                 GetClosestEmbodiedEntityIntersectedByRay(m_sIntersectionItem,
+                                                          m_cOcclusionCheckRay,
+                                                          m_cEmbodiedEntity))) {
                /* If noise was setup, add it */
                if(m_fDistanceNoiseStdDev > 0.0f) {
                   m_cLEDRelativePosXY += CVector2(
